@@ -2,7 +2,7 @@ import java.util.*;
 
 class Edge {
     String destination;
-    int weight; // Travel time in minutes
+    int weight; 
 
     public Edge(String destination, int weight) {
         this.destination = destination;
@@ -29,7 +29,7 @@ public class busroute {
 
     static Map<String, List<Edge>> graph = new HashMap<>();
     
-    // Quick reference map to let users type either the letter key or the full name
+    // Reference for User 
     static Map<String, String> stationMapping = new HashMap<>();
 
     static {
@@ -58,7 +58,7 @@ public class busroute {
         graph.get(destination).add(new Edge(source, weight));
     }
 
-    // Resolves mixed inputs safely (handles "A", "a", or "KL Sentral")
+    // User Can Enter Capital Letter / Small Letter / Places 
     private static String resolveInput(String input) {
         String cleanInput = input.trim().toUpperCase();
         if (stationMapping.containsKey(cleanInput)) {
@@ -137,7 +137,7 @@ public class busroute {
     }
 
     public static void main(String[] args) {
-        // Map Grid Layout Assignments using the station keys
+        // Map Layout Using Aplhabet
         addEdge("A", "B", 4);  // KL Sentral to Mid Valley
         addEdge("A", "C", 2);  // KL Sentral to Bangsar
         addEdge("A", "D", 5);  // KL Sentral to Cheras
@@ -157,23 +157,23 @@ public class busroute {
         String putrajayaName = stationMapping.get("L");
         graph.put(putrajayaName, new ArrayList<>()); 
 
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("_________________________________________________\n");
-        System.out.println("Available Bus Stops across the Regional Network: ");
+        System.out.println("Available Bus Stops across the   Regional Network: ");
         System.out.println("_________________________________________________\n");
         for (Map.Entry<String, String> entry : new TreeMap<>(stationMapping).entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
 
         System.out.print("\nEnter Source (Key letter or full name): ");
-        String source = sc.nextLine();
+        String source = scanner.nextLine();
 
         System.out.print("Enter Destination (Key letter or full name): ");
-        String destination = sc.nextLine();
+        String destination = scanner.nextLine();
 
         dijkstra(source, destination);
 
-        sc.close();
+        scanner.close();
     }
 }
