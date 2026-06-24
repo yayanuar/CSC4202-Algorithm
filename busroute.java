@@ -2,11 +2,13 @@ import java.util.*;
 
 class Edge {
     String destination;
-    int weight; 
+    int weight;
+    boolean open;
 
-    public Edge(String destination, int weight) {
+    public Edge(String destination, int weight, boolean open) {
         this.destination = destination;
         this.weight = weight;
+        this.open = open;
     }
 }
 
@@ -28,8 +30,8 @@ class Node implements Comparable<Node> {
 public class busroute {
 
     static Map<String, List<Edge>> graph = new HashMap<>();
-    
-    // Reference for User 
+
+    // map station
     static Map<String, String> stationMapping = new HashMap<>();
 
     static {
@@ -47,73 +49,95 @@ public class busroute {
         stationMapping.put("L", "PUTRAJAYA");
     }
 
-    public static void addEdge(String sourceKey, String destKey, int weight) {
+    public static void addEdge(String sourceKey, String destKey, int weight, boolean open) {
+
         String source = stationMapping.get(sourceKey.toUpperCase());
         String destination = stationMapping.get(destKey.toUpperCase());
 
         graph.putIfAbsent(source, new ArrayList<>());
         graph.putIfAbsent(destination, new ArrayList<>());
 
-        graph.get(source).add(new Edge(destination, weight));
-        graph.get(destination).add(new Edge(source, weight));
+        graph.get(source).add(new Edge(destination, weight, open));
+        graph.get(destination).add(new Edge(source, weight, open));
     }
 
-    // User Can Enter Capital Letter / Small Letter / Places 
+    // input accept letters / road name
     private static String resolveInput(String input) {
+
         String cleanInput = input.trim().toUpperCase();
-        if (stationMapping.containsKey(cleanInput)) {
+
+        if (stationMapping.containsKey(cleanInput))
             return stationMapping.get(cleanInput);
-        }
-        if (stationMapping.containsValue(cleanInput)) {
+
+        if (stationMapping.containsValue(cleanInput))
             return cleanInput;
-        }
+
         return null;
     }
 
     public static void dijkstra(String rawStart, String rawEnd) {
+
         String start = resolveInput(rawStart);
         String end = resolveInput(rawEnd);
 
-        if (start == null || end == null || !graph.containsKey(start) || !graph.containsKey(end)) {
-            System.out.println("\n[Error]: One or both bus stops do not exist in the network database.");
+        if (start == null || end == null ||
+                !graph.containsKey(start) || !graph.containsKey(end)) {
+
+            System.out.println("\n[ERROR] Invalid bus stop entered.");
             return;
         }
 
         Map<String, Integer> distance = new HashMap<>();
         Map<String, String> previous = new HashMap<>();
+
         PriorityQueue<Node> pq = new PriorityQueue<>();
 
-        for (String vertex : graph.keySet()) {
+        for (String vertex : graph.keySet())
             distance.put(vertex, Integer.MAX_VALUE);
-        }
 
         distance.put(start, 0);
+
         pq.offer(new Node(start, 0));
 
         while (!pq.isEmpty()) {
+
             Node current = pq.poll();
-            String currentVertex = current.vertex;
 
-            if (current.distance > distance.get(currentVertex)) continue;
+            if (current.distance > distance.get(current.vertex))
+                continue;
 
-            for (Edge edge : graph.get(currentVertex)) {
-                int newDistance = distance.get(currentVertex) + edge.weight;
+            for (Edge edge : graph.get(current.vertex)) {
+
+                // skip closed roads
+                if (!edge.open)
+                    continue;
+
+                int newDistance = distance.get(current.vertex) + edge.weight;
 
                 if (newDistance < distance.get(edge.destination)) {
+
                     distance.put(edge.destination, newDistance);
-                    previous.put(edge.destination, currentVertex);
+
+                    previous.put(edge.destination, current.vertex);
+
                     pq.offer(new Node(edge.destination, newDistance));
                 }
             }
         }
 
         if (distance.get(end) == Integer.MAX_VALUE) {
-            System.out.println("\nNo path exists between " + start + " and " + end + ".");
-            System.out.println("Status: Sector inaccessible due to severe transit disruptions / road closures.");
+
+            System.out.println("\n=================================================");
+            System.out.println("No available route found.");
+            System.out.println("Possible reason:");
+            System.out.println("- Road closures");
+            System.out.println("- Destination disconnected");
+            System.out.println("=================================================");
             return;
         }
 
         List<String> path = new ArrayList<>();
+
         String current = end;
 
         while (current != null) {
@@ -123,53 +147,80 @@ public class busroute {
 
         Collections.reverse(path);
 
-        System.out.println("\n========================================================");
-        System.out.println("            RAPID KL OPTIMIZED ROUTE ANALYSIS           ");
-        System.out.println("========================================================");
-        
+        System.out.println("\n=================================================");
+        System.out.println("      RAPID KL BUS ROUTE OPTIMIZATION SYSTEM");
+        System.out.println("=================================================");
+
+        System.out.println("\nOptimal Route:");
+
         for (int i = 0; i < path.size(); i++) {
+
             System.out.print(path.get(i));
-            if (i != path.size() - 1) System.out.print(" -> \n");
+
+            if (i != path.size() - 1)
+                System.out.print("\n->\n");
         }
-        System.out.println("\n_________________________________________________\n");
-        System.out.println("Total Estimated Travel Time: " + distance.get(end) + " mins");
-        System.out.println("========================================================");
+
+        System.out.println("\n");
+
+        System.out.println("Total Estimated Travel Time : "
+                + distance.get(end) + " minutes");
+
+        System.out.println("=================================================");
     }
 
     public static void main(String[] args) {
-        // Map Layout Using Aplhabet
-        addEdge("A", "B", 4);  // KL Sentral to Mid Valley
-        addEdge("A", "C", 2);  // KL Sentral to Bangsar
-        addEdge("A", "D", 5);  // KL Sentral to Cheras
-        addEdge("B", "E", 10); // Mid Valley to Ampang
-        addEdge("C", "D", 8);  // Bangsar to Cheras
-        addEdge("C", "F", 3);  // Bangsar to Petaling Jaya (PJ)
-        addEdge("D", "E", 2);  // Cheras to Ampang
-        addEdge("D", "F", 6);  // Cheras to Petaling Jaya (PJ)
-        addEdge("F", "G", 7);  // Petaling Jaya (PJ) to Subang Jaya
-        addEdge("G", "H", 5);  // Subang Jaya to Shah Alam
-        addEdge("H", "I", 12); // Shah Alam to Klang
-        addEdge("B", "J", 9);  // Mid Valley to Puchong
-        addEdge("J", "K", 15); // Puchong to Cyberjaya
-        addEdge("E", "K", 20); // Ampang to Cyberjaya
 
-        // Putrajaya (L) is initialized in the system but isolated due to the scenario constraints
-        String putrajayaName = stationMapping.get("L");
-        graph.put(putrajayaName, new ArrayList<>()); 
+        // open/closed route
+
+        addEdge("A", "B", 8, true);
+        addEdge("A", "C", 5, true);
+        addEdge("A", "D", 10, true);
+
+        addEdge("D", "E", 4, true);
+
+        addEdge("B", "C", 3, true);
+
+        addEdge("C", "F", 8, true);
+
+        addEdge("F", "J", 8, true);
+
+        addEdge("J", "G", 5, true);
+
+        addEdge("G", "H", 7, true);
+
+        addEdge("J", "K", 8, true);
+
+        addEdge("K", "I", 12, true);
+
+        addEdge("J", "L", 9, false);
+
+        addEdge("B", "F", 12, false);
+
+        addEdge("F", "G", 6, false);
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("_________________________________________________\n");
-        System.out.println("Available Bus Stops across the   Regional Network: ");
-        System.out.println("_________________________________________________\n");
-        for (Map.Entry<String, String> entry : new TreeMap<>(stationMapping).entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
+        System.out.println("=================================================");
+        System.out.println("        KUALA LUMPUR BUS NETWORK");
+        System.out.println("=================================================\n");
+
+        System.out.println("Available Bus Stops:\n");
+
+        for (Map.Entry<String, String> entry :
+                new TreeMap<>(stationMapping).entrySet()) {
+
+            System.out.printf("%s : %s%n",
+                    entry.getKey(),
+                    entry.getValue());
         }
 
-        System.out.print("\nEnter Source (Key letter or full name): ");
+        System.out.println();
+
+        System.out.print("Enter Source (Letter or Name): ");
         String source = scanner.nextLine();
 
-        System.out.print("Enter Destination (Key letter or full name): ");
+        System.out.print("Enter Destination (Letter or Name): ");
         String destination = scanner.nextLine();
 
         dijkstra(source, destination);
