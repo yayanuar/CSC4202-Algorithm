@@ -109,20 +109,20 @@ Where:
 
 The system contains 12 bus stops:
 
-| Code | Bus Stop      |
-| ---- | ------------- |
-| A    | KL SENTRAL    |
-| B    | MID VALLEY    |
-| C    | BANGSAR       |
-| D    | CHERAS        |
-| E    | AMPANG        |
-| F    | PETALING JAYA |
-| G    | SUBANG JAYA   |
-| H    | SHAH ALAM     |
-| I    | KLANG         |
-| J    | PUCHONG       |
-| K    | CYBERJAYA     |
-| L    | PUTRAJAYA     |
+| Code | Bus Stop              |
+| ---- | --------------------- |
+| A    | BUTTERWORTH           |
+| B    | IPOH                  |
+| C    | KUALA LUMPUR (TBS)    |
+| D    | ALOR SETAR            |
+| E    | KANGAR                |
+| F    | SEREMBAN              |
+| G    | MELAKA SENTRAL        |
+| H    | JOHOR BHARU           |
+| I    | KOTA BHARU            |
+| J    | KUANTAN               |
+| K    | KUALA TERENGGANU      |
+| L    | TEMERLOH              |
 
 Users can enter either:
 
@@ -235,11 +235,7 @@ DIJKSTRA(Source, Destination)
 
 <img width="566" height="656" alt="alor setar to temerloh" src="https://github.com/user-attachments/assets/25896dec-67c6-4b26-a414-09446488c477" />
 
-```
-
 The system successfully identifies the shortest available route while avoiding closed roads.
-
----
 
 # 9. Algorithm Analysis
 
@@ -271,9 +267,7 @@ Although fewer nodes may require processing, the algorithm still maintains the s
 
 Time Complexity:
 
-```
 O((V+E)logV)
-```
 
 ---
 
@@ -285,9 +279,7 @@ The algorithm evaluates available routes and updates distances when a shorter pa
 
 Time Complexity:
 
-```
 O((V+E)logV)
-```
 
 ---
 
@@ -299,9 +291,7 @@ Every vertex and edge may be processed.
 
 Time Complexity:
 
-```
 O((V+E)logV)
-```
 
 ---
 
@@ -346,15 +336,11 @@ Therefore, the system is able to produce the shortest available route between tw
 
 3. Compile the Java file:
 
-```
 javac busroute.java
-```
 
 4. Run the program:
 
-```
 java busroute
-```
 
 5. Enter the source and destination bus stops.
 
