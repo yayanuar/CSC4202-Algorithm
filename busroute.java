@@ -169,22 +169,22 @@ public class busroute {
 
         public static void main(String[] args) {
      
-        addEdge("A", "B", 2, true);      // Butterworth <-> Ipoh 
-        addEdge("A", "C", 4, true);      // Butterworth <-> Kuala Lumpur (TBS) 
-        addEdge("A", "D", 1, true);      // Butterworth <-> Alor Setar 
-        addEdge("B", "E", 3, true);      // Ipoh <-> Kangar 
-        addEdge("C", "D", 5, true);      // Kuala Lumpur (TBS) <-> Alor Setar 
-        addEdge("C", "F", 1, true);      // Kuala Lumpur (TBS) <-> Seremban 
-        addEdge("D", "E", 1, true);      // Alor Setar <-> Kangar 
-        addEdge("D", "F", 6, true);      // Alor Setar <-> Seremban 
-        addEdge("F", "G", 2, true);      // Seremban <-> Melaka Sentral 
-        addEdge("G", "H", 3, true);      // Melaka Sentral <-> Johor Bahru 
-        addEdge("H", "I", 9, true);      // Johor Bahru <-> Kota Bharu 
-        addEdge("B", "J", 4, true);      // Ipoh <-> Kuantan 
-        addEdge("J", "K", 3, true);      // Kuantan <-> Kuala Terengganu 
-        addEdge("E", "K", 8, true);      // Kangar <-> Kuala Terengganu ]
-        addEdge("J", "L", 2, false);     // Kuantan <-> Temerloh 
-        addEdge("K", "I", 3, true);      // Kuala Terengganu <-> Kota Bharu 
+        addEdge("A", "B", 2, true);      // Butterworth <-> Ipoh
+        addEdge("A", "C", 4, true);      // Butterworth <-> Kuala Lumpur (TBS)
+        addEdge("A", "D", 1, true);      // Butterworth <-> Alor Setar
+        addEdge("B", "E", 3, true);      // Ipoh <-> Kangar
+        addEdge("C", "F", 1, true);      // Kuala Lumpur (TBS) <-> Seremban
+        addEdge("D", "E", 1, true);      // Alor Setar <-> Kangar
+        addEdge("G", "H", 3, true);      // Melaka Sentral <-> Johor Bahru
+        addEdge("H", "I", 9, true);      // Johor Bahru <-> Kota Bharu
+        addEdge("B", "J", 4, true);      // Ipoh <-> Kuantan
+        addEdge("J", "F", 5, true);      //Kuantan <-> Seremban
+        addEdge("J", "K", 3, true);      // Kuantan <-> Kuala Terengganu
+        addEdge("J", "G", 3, true);      // Kuantan <-> Melaka Sentral
+        addEdge("J", "L", 2, false);     // Kuantan <-> Temerloh (Closed)
+        addEdge("K", "I", 3, true);      // Kuala Terengganu <-> Kota Bharu
+        addEdge("B", "F", 3, false);     // Ipoh <-> Seremban (Closed)
+        addEdge("F", "G", 2, false);     // Seremban <-> Melaka Sentral (Closed)
 
         Scanner scanner = new Scanner(System.in);
 
