@@ -1,4 +1,4 @@
-# RAPID KL Bus Route Optimization System Using Dijkstra's Algorithm
+# Malaysia Express Bus Route Optimization System Using Dijkstra's Algorithm
 
 ## 1. Project Overview
 
