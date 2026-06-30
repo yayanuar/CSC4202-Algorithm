@@ -61,7 +61,7 @@ Dijkstra's Algorithm was selected because:
 
 The Malaysia bus network is represented using a weighted graph.
 
-<img width="826" height="457" alt="Screenshot 2026-07-01 024007" src="https://github.com/user-attachments/assets/6e50de7e-a7fb-4d6c-b349-787d94ebb0c1" />
+<img width="842" height="468" alt="Screenshot 2026-07-01 051007" src="https://github.com/user-attachments/assets/2e0b0200-87f7-4a7c-bc7e-500c5611e80f" />
 
 ## Graph Representation
 
@@ -71,13 +71,13 @@ Example:
 
 ```
 
-KL SENTRAL
+KUALA LUMPUR (TBS)
 |
-|-- MID VALLEY (8 minutes)
+|-- BUTTERWORTH (4 hours)
 |
-|-- BANGSAR (5 minutes)
+|-- ALOR SETAR (1 hour)
 |
-|-- CHERAS (10 minutes)
+|-- KANGAR (1 hour)
 
 ````
 
@@ -223,17 +223,17 @@ DIJKSTRA(Source, Destination)
 
 # 8. Program Demonstration
 
-## Butterworth (A) to Alor Setar (D)
+## Ipoh (B) to Melaka Sentral (G)
 
 <img width="516" height="705" alt="butterworth to alor setar" src="https://github.com/user-attachments/assets/e4bc12b0-1273-4a96-b324-ea88a7dc1fab" />
 
-## Kuantan (J) to Melaka Sentral (G)
+## Temerloh (L) to Kuantan (J)
 
-<img width="773" height="707" alt="kuantan to melaka sentral" src="https://github.com/user-attachments/assets/67664208-e3d0-459a-be97-57d31ec25ea8" />
+<img width="526" height="655" alt="temerloh to kuantan" src="https://github.com/user-attachments/assets/a8da3cfd-a74e-4152-ba3e-876293a87a9d" />
 
-## Alor Setar (D) to Temerloh (L)
+## Kota Bharu (I) to Seremban (F)
 
-<img width="566" height="656" alt="alor setar to temerloh" src="https://github.com/user-attachments/assets/25896dec-67c6-4b26-a414-09446488c477" />
+<img width="560" height="702" alt="kota bharu to seremban" src="https://github.com/user-attachments/assets/620f153d-64e5-46e1-86dd-145d561cff37" />
 
 The system successfully identifies the shortest available route while avoiding closed roads.
 
