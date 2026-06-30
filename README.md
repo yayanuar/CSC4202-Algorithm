@@ -248,9 +248,9 @@ The system implements:
 
 Therefore, the time complexity is:
 
-[
+```
 O((V+E)\log V)
-]
+```
 
 Where:
 
@@ -267,7 +267,9 @@ Although fewer nodes may require processing, the algorithm still maintains the s
 
 Time Complexity:
 
+```
 O((V+E)logV)
+```
 
 ---
 
@@ -279,7 +281,9 @@ The algorithm evaluates available routes and updates distances when a shorter pa
 
 Time Complexity:
 
+```
 O((V+E)logV)
+```
 
 ---
 
@@ -291,7 +295,9 @@ Every vertex and edge may be processed.
 
 Time Complexity:
 
+```
 O((V+E)logV)
+```
 
 ---
 
@@ -336,11 +342,15 @@ Therefore, the system is able to produce the shortest available route between tw
 
 3. Compile the Java file:
 
+```
 javac busroute.java
+```
 
 4. Run the program:
 
+```
 java busroute
+```
 
 5. Enter the source and destination bus stops.
 
@@ -369,10 +379,10 @@ Rapid KL Bus Route Optimization System Using Dijkstra's Algorithm
 
 ## Group Members
 ```
-* Haikal
-* Afiah
-* Alieya
-* Farhanie
-* Zulaikha
+1. Haikal
+2. Afiah
+3. Alieya
+4. Farhanie
+5. Zulaikha
 
 ```
